@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iit.tutorials.taxdepartment.MainController">
+    <children>
+        <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+
+            <!-- File Selection -->
+            <HBox spacing="10">
+                <TextField fx:id="filePathField" prefWidth="500" promptText="Select JSON file to import..." />
+                <Button onAction="#handleImport" text="Import File" textFill="#1b1313" />
+            </HBox>
+
+            <!-- Import Status -->
+            <Label fx:id="importStatusLabel" text="Status: Waiting...">
+            <font>
+               <Font name="System Bold Italic" size="11.0" />
+            </font></Label>
+
+            <!-- Action Buttons -->
+            <HBox spacing="10">
+                <Button onAction="#handleValidate" text="Validate" />
+                <Button onAction="#handleDeleteInvalid" text="Delete Invalid" />
+                <Button onAction="#handleProfit" text="Calculate Profit" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteZeroProfit" text="Delete Zero Profit" />
+            </HBox>
+
+            <!-- Summary Header -->
+            <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Summary" />
+
+            <!-- Validation Summary -->
+            <HBox spacing="20">
+                <Label fx:id="totalRecordsLabel" text="Total: 0" />
+                <Label fx:id="validRecordsLabel" text="Valid: 0" />
+                <Label fx:id="invalidRecordsLabel" text="Invalid: 0" />
+            </HBox>
+
+            <!-- Tax Calculation -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Tax Rate (%):" />
+                <TextField fx:id="taxRateField" prefWidth="100" promptText="Enter tax rate" />
+                <Button onAction="#handleFinalTax" text="Calculate Final Tax" />
+                <Label fx:id="finalTaxLabel" text="Final Tax: Rs. 0.00">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            </HBox>
+
+            <Label fx:id="profitStatusLabel" text="Profit Status: Not Calculated" />
+
+            <!-- TableView -->
+            <TableView fx:id="transactionTable" prefHeight="300" prefWidth="917.0">
+                <columns>
+                    <TableColumn fx:id="itemCodeCol" prefWidth="120" text="Item Code" />
+                    <TableColumn fx:id="internalPriceCol" prefWidth="120" text="Internal Price" />
+                    <TableColumn fx:id="discountCol" prefWidth="100" text="Discount" />
+                    <TableColumn fx:id="salePriceCol" prefWidth="120" text="Sale Price" />
+                    <TableColumn fx:id="quantityCol" prefWidth="100" text="Quantity" />
+                    <TableColumn fx:id="checksumCol" prefWidth="100" text="Checksum" />
+                    <TableColumn fx:id="validCol" prefWidth="80" text="Valid" />
+                    <TableColumn fx:id="profitCol" prefWidth="120" text="Profit" />
+                </columns>
+            </TableView>
+
+        </VBox>
+    </children>
+</AnchorPane>
