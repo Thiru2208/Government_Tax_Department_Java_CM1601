@@ -24,11 +24,14 @@ public class MainController {
     @FXML private Label validRecordsLabel;
     @FXML private Label invalidRecordsLabel;
 
-    @FXML private TextField taxRateField;
-    @FXML private Label finalTaxLabel;
+    @FXML
+    TextField taxRateField;
+    @FXML
+    Label finalTaxLabel;
     @FXML private Label profitStatusLabel;
 
-    @FXML private TableView<Transaction> transactionTable;
+    @FXML
+    TableView<Transaction> transactionTable;
     @FXML private TableColumn<Transaction, String> itemCodeCol;
     @FXML private TableColumn<Transaction, Double> internalPriceCol;
     @FXML private TableColumn<Transaction, Double> discountCol;
@@ -126,7 +129,7 @@ public class MainController {
     }
 
     @FXML
-    private void handleValidate() {
+    void handleValidate() {
         int valid = 0;
         for (Transaction t : transactions) {
             t.setChecksum(calculateChecksum(t));
@@ -150,7 +153,7 @@ public class MainController {
     }
 
     @FXML
-    private void handleProfit() {
+    void handleProfit() {
         for (Transaction t : transactions) {
             double cost = t.getInternalPrice() * t.getQuantity();
             double expectedincome = t.getSalePrice() * t.getQuantity();
@@ -163,7 +166,7 @@ public class MainController {
     }
 
     @FXML
-    private void handleFinalTax() {
+    void handleFinalTax() {
         try {
             double rate = Double.parseDouble(taxRateField.getText()) / 100.0;
             double totalProfit = transactions.stream().filter(Transaction::isValid).mapToDouble(Transaction::getProfit).sum();
@@ -184,7 +187,7 @@ public class MainController {
         invalidRecordsLabel.setText("Invalid Records: " + invalid);
     }
 
-    private int calculateChecksum(Transaction t) {
+    int calculateChecksum(Transaction t) {
         int sum = 0;
         for (char ch : t.getItemCode().toCharArray()) {
             sum += ch;
